@@ -21,7 +21,19 @@ public class NetRcon
 	
     private DatagramPacket dataPacketOut;
     private DatagramPacket dataPacketIn;
-	
+    
+    /**
+     * Need to figure out if there are better default values as this will cause
+     * errors if not reconfigured with the other constructor.  It only masks a
+     * might not be initalized error message in the main class.
+     */
+    public NetRcon()
+    {
+        this.port = 0;
+        this.password = "";
+        this.returnsData = false;
+        this.receiveTimeout = 0;
+    }
     /**
      * Default Constructor
      * @param ip String
@@ -78,7 +90,8 @@ public class NetRcon
 
 		
 	// Build the UDP packet that is to be sent
-	dataPacketOut = new DatagramPacket(commandBytes, commandBytes.length, ipAddress, port);
+	dataPacketOut = new DatagramPacket(commandBytes, commandBytes.length, 
+                ipAddress, port);
 	
 	return dataPacketOut;
     }

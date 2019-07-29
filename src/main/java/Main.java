@@ -5,12 +5,12 @@ public class Main
 {
     public static void main(String args[])
     {
-        NetRcon NR;
+        NetRcon NR = new NetRcon();
         String ip;
         int port;
         String password;
         boolean returnsData = true;
-        int receiveTimeout = 1000;
+        int receiveTimeout = 10000;
         int sleepTimer = 500;
         Scanner sc = new Scanner(System.in);
         Boolean stop  = false;
@@ -33,11 +33,13 @@ public class Main
         }
         
         //maintain session and continue to ask for commands until exit flag met.
-        while ( stop != true )
+        while ( !command.equalsIgnoreCase("exit") )
         {
+            System.out.print(">");
+            command = sc.next();
             try
             {
-                NR.sendCommand( command );
+                System.out.println("Output: " + NR.sendCommand( command ));
             } catch ( InterruptedException ie)
             {
                 System.out.println("Command failed to send!  ERROR: " 
